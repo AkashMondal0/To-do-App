@@ -31,7 +31,7 @@ export default function Modal({ open, setOpen }) {
                         close
                     </Button>
                     <Button className="mx-2" variant="gradient" color="green" onClick={handleOpen}>
-                        send message
+                        ADD TODO
                     </Button>
                 </DialogFooter>
             </Dialog>
