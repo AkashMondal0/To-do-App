@@ -5,7 +5,6 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 

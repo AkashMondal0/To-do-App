@@ -18,8 +18,5 @@ module.exports = withMT({
       },
     },
   },
-  daisyui: {
-    themes: false,
-  },
-  plugins: [require("daisyui")],
+  plugins: [],
 })

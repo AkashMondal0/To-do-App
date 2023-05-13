@@ -5,7 +5,6 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -18,8 +17,7 @@ export default function Register() {
   })
 
   const addUsers = async () => {
-    const res = await axios.post('http://localhost:8000/Register', state)
-    console.log(res.data)
+   
   }
 
 
