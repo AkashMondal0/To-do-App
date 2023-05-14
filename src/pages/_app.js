@@ -4,7 +4,8 @@ import AppState from '../../context/AppState';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
+  // https://alert-red-beaver.cyclic.app/graphql
+  uri: 'http://localhost:5000/graphql',
   cache: new InMemoryCache(),
 });
 

@@ -1,33 +1,40 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import {
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineIcon,
+  Typography,
+  TimelineHeader,
+  IconButton,
+} from "@material-tailwind/react";
+import {
+  BellIcon,
+  ArchiveBoxIcon,
+  CurrencyDollarIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
+import { Fragment } from "react";
 
-export default function TodoCard() {
+export default function TodoCard({ item, index }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    <TimelineItem className="h-28 my-5 mx-2 w-80">
+      <TimelineConnector className="!w-[78px]" />
+      <TimelineHeader className="px-5 relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5 justify-between">
+        <div className="flex items-center gap-2">
+          <TimelineIcon className="p-3" variant="ghost">
+            <BellIcon className="h-5 w-5" />
+          </TimelineIcon>
+          <div>
+            <Typography variant="h6" color="blue-gray">
+              {item.title}
+            </Typography>
+            <Typography variant="small" color="gray" className="font-normal">
+              {item.message}
+            </Typography>
+          </div>
+        </div>
+        <TrashIcon className="h-6 w-6 cursor-pointer" />
+      </TimelineHeader>
+    </TimelineItem>
   );
 }

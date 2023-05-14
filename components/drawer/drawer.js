@@ -1,40 +1,57 @@
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import React, { useContext, useState } from "react";
+import AppContext from '../../context/AppContext';
 import {
+  Drawer,
+  Typography,
+  IconButton,
   Input,
+  Textarea,
   Button,
-  Textarea
 } from "@material-tailwind/react";
-import React from "react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
 
 export default function BottomDrawer({ open, setOpen }) {
-
+  const AppStart = useContext(AppContext)
   const toggleDrawer = () => setOpen(!open)
 
+  const [state, setState] = useState({
+    title: '',
+    message: '',
+  })
+
+
+  const ADD_TODO = async () => {
+    if (state.title.length > 0 && state.message.length > 0) {
+      AppStart.ADD_TODO({
+        title: state.title,
+        message: state.message,
+      })
+      setState({
+        title: '',
+        message: '',
+      })
+      toggleDrawer()
+    }
+  }
 
   return (
-    <React.Fragment >
-      <SwipeableDrawer
-        anchor={"bottom"}
-        open={open}
-        onClose={toggleDrawer}
-        onOpen={toggleDrawer}>
-        <div className='justify-center flex items-center'>
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 ">
-            <div className="mb-4 flex flex-col gap-6">
-              <div className='w-96'>
-                <Input size="lg" label="Title" />
-              </div>
-              <div className="w-96">
-                <Textarea label="Message" />
-              </div>
-            </div>
-            <Button onClick={toggleDrawer} className="mt-6" fullWidth>
-              ADD TODO
-            </Button>
-          </form>
+    <React.Fragment>
+      <Drawer open={open} onClose={toggleDrawer} className="w-screen">
+        <div className="mb-2 flex items-center justify-between p-4">
+          <Typography variant="h5" color="blue-gray">
+            ADD TODO
+          </Typography>
+          <IconButton variant="text" color="blue-gray" onClick={toggleDrawer}>
+            <XMarkIcon strokeWidth={2} className="h-5 w-5" />
+          </IconButton>
         </div>
-
-      </SwipeableDrawer>
+        <form className="flex flex-col gap-6 p-4">
+          <Input type="email" value={state.title} label="Title" onChange={(e) => { setState({ ...state, title: e.target.value }) }} />
+          <Textarea rows={6} value={state.message} label="Message" onChange={(e) => { setState({ ...state, message: e.target.value }) }} />
+          <Button onClick={ADD_TODO}>ADD TODO</Button>
+        </form>
+      </Drawer>
     </React.Fragment>
   );
 }

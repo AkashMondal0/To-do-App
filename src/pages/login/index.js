@@ -1,3 +1,4 @@
+import { useLazyQuery } from "@apollo/client";
 import {
     Card,
     Input,
@@ -6,20 +7,38 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { gqlLogin } from "../../../controller/auth.api.controller";
+
 
 export default function Login() {
-
+    const [loginCredential, { data, error, loading }] = useLazyQuery(gqlLogin)
     const router = useRouter()
     const [state, setState] = useState({
         email: '',
-        password: ''
+        password: '',
+        message: ""
     })
 
     const addUsers = async () => {
-    
+        loginCredential({
+            variables: {
+                email: state.email,
+                password: state.password
+            }
+        })
     }
 
+    useEffect(() => {
+        if (data) {
+            if (data.login === "Incorrect password" || data.login === "User does not exist") {
+                console.log(data.login)
+            } else {
+                localStorage.setItem("mysqlToken", data.login)
+                router.push("/home")
+            }
+        }
+    }, [data])
 
     return (
         <div className="flex justify-center items-center h-screen">
@@ -45,32 +64,12 @@ export default function Login() {
                             })
                         }} />
                     </div>
-                    <Checkbox
-                        label={
-                            (
-                                <Typography
-                                    variant="small"
-                                    color="gray"
-                                    className="flex items-center font-normal"
-                                >
-                                    I agree the
-                                    <a
-                                        href="#"
-                                        className="font-medium transition-colors hover:text-blue-500"
-                                    >
-                                        &nbsp;Terms and Conditions
-                                    </a>
-                                </Typography>
-                            )
-                        }
-                        containerProps={{ className: "-ml-2.5" }}
-                    />
                     <Button onClick={addUsers} className="mt-6" fullWidth>
                         Login
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?{" "}
-                        <a onClick={()=>{
+                        <a onClick={() => {
                             router.push('/auth/register')
                         }} className="font-medium text-blue-500 transition-colors hover:text-blue-700 cursor-pointer">
                             Sign In
