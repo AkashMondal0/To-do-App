@@ -1,16 +1,5 @@
 import { gql } from '@apollo/client';
-export const LOGIN_USER = async (data) => { }
-export const REGISTER_USER = async (data) => { }
-export const LOGOUT_USER = async (data) => { }
-export const GET_USER = async (data) => { }
 
-export const getUsers = gql`
-query u {
- getUsers {
-   email
- }
-}
-`
 export const gqlLogin = gql`
 query login($email: String!, $password: String!) {
   login(email: $email, password: $password)
@@ -22,11 +11,19 @@ mutation usersRegister($username: String!, $email: String!, $password: String!) 
 }
 `
 export const gqlGetUserData = gql`
-query get($token: String!) {
+query getUserDetails($token: String!) {
   getUserDetails(token: $token) {
     username
     email
     id
+    todos {
+      title
+      id
+      message
+      status
+      updatedAt
+      createdAt
+    }
   }
 }
 

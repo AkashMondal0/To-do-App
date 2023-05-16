@@ -5,7 +5,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Header from "../../../components/header/header";
 import BottomDrawer from "../../../components/drawer/drawer";
 import SpeedDial from "../../../components/speedDial/speedDial";
-import { Timeline } from "@material-tailwind/react";
 
 
 const Home = () => {
@@ -36,18 +35,18 @@ const Home = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {AppState.state.UserTodo.map((item, index) => { { return <TodoCard index={index} item={item} /> } })}
+            {AppState.state.UserTodo.map((item, index) => { { return <TodoCard key={item.id} index={index} item={item} AppState={AppState} /> } })}
           </div>
 
           {/* complete tasks heading */}
-          <div className="my-5">
+          {/* <div className="my-5">
             <Typography variant="h3">Completed</Typography>
           </div>
           <div className="">
             <Timeline>
-              {AppState.state.UserTodo.map((item, index) => { { return <TodoCard index={index} item={item} /> } })}
+              {AppState.state.UserTodo.map((item, index) => { { return <TodoCard key={item.id} index={index} item={item} /> } })}
             </Timeline>
-          </div>
+          </div> */}
         </div>
       </section>
 

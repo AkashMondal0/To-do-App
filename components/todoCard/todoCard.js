@@ -15,7 +15,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { Fragment } from "react";
 
-export default function TodoCard({ item, index }) {
+export default function TodoCard({ item, index, AppState }) {
+  // console.log(item)
   return (
     <TimelineItem className="h-28 my-5 mx-2 w-80">
       <TimelineConnector className="!w-[78px]" />
@@ -33,7 +34,9 @@ export default function TodoCard({ item, index }) {
             </Typography>
           </div>
         </div>
-        <TrashIcon className="h-6 w-6 cursor-pointer" />
+        <TrashIcon className="h-6 w-6 cursor-pointer" onClick={() => {
+          AppState.DELETE_TODO(item)
+        }} />
       </TimelineHeader>
     </TimelineItem>
   );

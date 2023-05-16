@@ -20,7 +20,7 @@ export default function Login() {
         message: ""
     })
 
-    const addUsers = async () => {
+    const handle = async () => {
         loginCredential({
             variables: {
                 email: state.email,
@@ -35,7 +35,7 @@ export default function Login() {
                 console.log(data.login)
             } else {
                 localStorage.setItem("mysqlToken", data.login)
-                router.push("/home")
+                router.push("/")
             }
         }
     }, [data])
@@ -64,13 +64,13 @@ export default function Login() {
                             })
                         }} />
                     </div>
-                    <Button onClick={addUsers} className="mt-6" fullWidth>
+                    <Button onClick={handle} className="mt-6" fullWidth>
                         Login
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?{" "}
                         <a onClick={() => {
-                            router.push('/auth/register')
+                            router.push('/register')
                         }} className="font-medium text-blue-500 transition-colors hover:text-blue-700 cursor-pointer">
                             Sign In
                         </a>
