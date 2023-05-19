@@ -21,7 +21,8 @@ export default function TodoCard({ item, AppState, open, setOpen }) {
   }
 
   return (
-    <TimelineItem className="h-28 my-5 mx-2 w-80">
+    <>
+      {/* <TimelineItem className="h-28 my-5 mx-2 w-80"> */}
       <TimelineConnector className="!w-[78px]" />
       <TimelineHeader className="px-5 relative rounded-xl border border-blue-gray-50 bg-white py-3 pl-4 pr-8 shadow-lg shadow-blue-gray-900/5 justify-between">
         <div className="flex items-center gap-2">
@@ -46,6 +47,7 @@ export default function TodoCard({ item, AppState, open, setOpen }) {
           </svg>
         </div>
       </TimelineHeader>
-    </TimelineItem>
+    {/* </TimelineItem> */}
+    </>
   );
 }

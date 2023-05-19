@@ -111,7 +111,7 @@ export default function Header() {
     <React.Fragment>
       <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
         <div className="relative mx-auto flex items-center text-blue-gray-900 justify-between">
-          <Typography variant="h4">Sky Todo</Typography>
+          <Typography variant="h4">Todo</Typography>
           <ProfileMenu />
         </div>
       </Navbar>

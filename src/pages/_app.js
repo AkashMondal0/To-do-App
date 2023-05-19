@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 
 const client = new ApolloClient({
   // https://alert-red-beaver.cyclic.app/graphql
-  uri: 'http://localhost:5000/graphql',
+  uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache(),
 });
 

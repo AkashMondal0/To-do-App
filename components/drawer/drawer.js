@@ -56,7 +56,6 @@ export default function BottomDrawer({ open, setOpen }) {
     })
   }, [open])
 
-
   return (
     <React.Fragment>
       <Drawer open={open.drawerOpen} onClose={toggleDrawer} className="w-screen">
@@ -71,7 +70,7 @@ export default function BottomDrawer({ open, setOpen }) {
         <form className="flex flex-col gap-6 p-4">
           <Input type="email" value={state.title} label="Title" onChange={(e) => { setState({ ...state, title: e.target.value }) }} />
           <Textarea rows={6} value={state.message} label="Message" onChange={(e) => { setState({ ...state, message: e.target.value }) }} />
-          {open.action == "ADD TODO" ? <Button onClick={ADD_TODO}>ADD TODO</Button> : <Button onClick={UPDATE_TODO}>UPDATE TODO</Button>}
+          {open.Action === "ADD TODO" ? <Button onClick={ADD_TODO}>ADD TODO</Button> : <Button onClick={UPDATE_TODO}>UPDATE TODO</Button>}
         </form>
       </Drawer>
     </React.Fragment>

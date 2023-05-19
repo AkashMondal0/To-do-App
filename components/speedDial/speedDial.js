@@ -6,7 +6,7 @@ import { Button } from "@material-tailwind/react";
 const SpeedDial = ({ open, setOpen }) => {
 
     const handleSwitchChange = () => {
-        setOpen({ ...open, drawerOpen: !open.drawerOpen, Action: "ADD TODO" })
+        setOpen({ ...open, drawerOpen: !open.drawerOpen, Action: "ADD TODO", data: { title: '', message: '', todoId: null } })
     }
 
     return (

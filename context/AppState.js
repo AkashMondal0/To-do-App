@@ -79,6 +79,7 @@ const AppState = ({ children }) => {
     UpdateTodoGql({
       variables: updatedTodo
     })
+
     refetch()
   }
 
