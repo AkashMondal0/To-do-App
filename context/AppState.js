@@ -16,10 +16,10 @@ const getFromStorage = () => {
 }
 
 const AppState = ({ children }) => {
-  const [GetUserData, { data, loading, error }] = useLazyQuery(gqlGetUserData)
-  const [CreateTodoGql, { createTodo }] = useMutation(CREATE_TODO_GQL)
-  const [DeleteTodoGql, { deleteTodo }] = useMutation(DELETE_TODO_GQL)
-  const [UpdateTodoGql, { updateTodo }] = useMutation(UPDATE_TODO_GQL)
+  const [GetUserData, { data, loading, error, refetch }] = useLazyQuery(gqlGetUserData)
+  const [CreateTodoGql, { }] = useMutation(CREATE_TODO_GQL)
+  const [DeleteTodoGql, { }] = useMutation(DELETE_TODO_GQL)
+  const [UpdateTodoGql, { }] = useMutation(UPDATE_TODO_GQL)
 
   const router = useRouter()
 
@@ -69,27 +69,17 @@ const AppState = ({ children }) => {
 
   const UPDATE_TODO = async (data) => {
     const updatedTodo = {
-      todoId: data.id,
+      todoId: data.todoId,
       title: data.title,
       message: data.message,
       imageUrl: "no img",
       status: 0,
-      updatedAt: new Date(),
     }
-
     // GraphQL
     UpdateTodoGql({
       variables: updatedTodo
     })
-    const updatedTodoList = state.UserTodo.find((todo) => {
-      if (todo.id === data.id) {
-        todo.title = data.title
-        todo.message = data.message
-        todo.updatedAt = new Date()
-      }
-    })
-
-    setState({ ...state, UserTodo: updatedTodoList })
+    refetch()
   }
 
   const AppStart = async () => {

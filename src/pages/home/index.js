@@ -9,7 +9,15 @@ import SpeedDial from "../../../components/speedDial/speedDial";
 
 const Home = () => {
   const AppState = useContext(AppContext)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState({
+    drawerOpen: false,
+    Action: null,
+    data: {
+      title: '',
+      message: '',
+      todoId: null
+    }
+  })
 
   useEffect(() => {
     AppState.AppStart()
@@ -35,7 +43,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-wrap">
-            {AppState.state.UserTodo.map((item, index) => { { return <TodoCard key={item.id} index={index} item={item} AppState={AppState} /> } })}
+            {AppState?.state?.UserTodo?.map((item, index) => { { return <TodoCard key={item.id} item={item} AppState={AppState} open={open} setOpen={setOpen} /> } })}
           </div>
 
           {/* complete tasks heading */}

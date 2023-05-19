@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from '../../context/AppContext';
 import {
   Drawer,
@@ -13,13 +13,14 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function BottomDrawer({ open, setOpen }) {
   const AppStart = useContext(AppContext)
-  const toggleDrawer = () => setOpen(!open)
+  const toggleDrawer = () => setOpen({ ...open, drawerOpen: !open.drawerOpen });
 
   const [state, setState] = useState({
-    title: '',
-    message: '',
+    title: open.data.title,
+    message: open.data.message,
+    todoId: open.data.id,
+    array: open.data,
   })
-
 
   const ADD_TODO = async () => {
     if (state.title.length > 0 && state.message.length > 0) {
@@ -35,12 +36,33 @@ export default function BottomDrawer({ open, setOpen }) {
     }
   }
 
+  const UPDATE_TODO = async () => {
+
+    AppStart.UPDATE_TODO(state)
+    setState({
+      title: '',
+      message: '',
+    })
+    toggleDrawer()
+
+  }
+
+  useEffect(() => {
+    setState({
+      title: open.data.title,
+      message: open.data.message,
+      todoId: open.data.id,
+      array: open.data,
+    })
+  }, [open])
+
+
   return (
     <React.Fragment>
-      <Drawer open={open} onClose={toggleDrawer} className="w-screen">
+      <Drawer open={open.drawerOpen} onClose={toggleDrawer} className="w-screen">
         <div className="mb-2 flex items-center justify-between p-4">
           <Typography variant="h5" color="blue-gray">
-            ADD TODO
+            {open.Action}
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={toggleDrawer}>
             <XMarkIcon strokeWidth={2} className="h-5 w-5" />
@@ -49,7 +71,7 @@ export default function BottomDrawer({ open, setOpen }) {
         <form className="flex flex-col gap-6 p-4">
           <Input type="email" value={state.title} label="Title" onChange={(e) => { setState({ ...state, title: e.target.value }) }} />
           <Textarea rows={6} value={state.message} label="Message" onChange={(e) => { setState({ ...state, message: e.target.value }) }} />
-          <Button onClick={ADD_TODO}>ADD TODO</Button>
+          {open.action == "ADD TODO" ? <Button onClick={ADD_TODO}>ADD TODO</Button> : <Button onClick={UPDATE_TODO}>UPDATE TODO</Button>}
         </form>
       </Drawer>
     </React.Fragment>

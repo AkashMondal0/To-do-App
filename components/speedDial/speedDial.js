@@ -6,8 +6,9 @@ import { Button } from "@material-tailwind/react";
 const SpeedDial = ({ open, setOpen }) => {
 
     const handleSwitchChange = () => {
-        setOpen(!open);
-    };
+        setOpen({ ...open, drawerOpen: !open.drawerOpen, Action: "ADD TODO" })
+    }
+
     return (
         <React.Fragment>
 
